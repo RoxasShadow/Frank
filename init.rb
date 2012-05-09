@@ -6,7 +6,7 @@ require 'dm-sanitizer' # sanitize (xss protection)
 require 'rack/csrf' # csrf protection
 
 class Frank < Sinatra::Base
-  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/database.db")
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db/database.db")
 	enable :sessions
 	
 	@title = 'Example blog'
@@ -14,7 +14,7 @@ class Frank < Sinatra::Base
   configure do
     set :method_override, true
     set :views, settings.root + '/app/views'
-    set :public_folder, settings.root + "/app/assets"
+    set :public_folder, settings.root + '/app/assets'
   	use Rack::Session::Cookie
   	use Rack::Csrf, :raise => true
   end

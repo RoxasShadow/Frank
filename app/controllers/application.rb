@@ -14,7 +14,7 @@ class Frank
   # GET
   ##
   not_found do
-    erb :404
+    erb :'404'
   end
 
   ##
