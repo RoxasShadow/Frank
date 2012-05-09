@@ -1,0 +1,12 @@
+<a href="/posts/new">New post</a>
+
+<% if not @posts.empty? %>
+	<section>
+	<% @posts.each do |post| %>
+		<article>
+			<h2>Post #<%= post.id %> written by <%= post.username %> the <%= post.created_at.strftime("%Y/%m/%d") %></h2>
+			<p><%= post.text %></p>
+		</article>
+	<% end %>
+	</section>
+<% end %>
