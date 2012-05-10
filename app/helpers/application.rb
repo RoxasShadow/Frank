@@ -23,18 +23,23 @@ class Frank
 		
 		# Set the cookie with the name "key" and content "value".
 		def set_cookie(key, value)
-			request.cookie[key] = value
+			response.set_cookie(key, value)
+		end
+		
+		# Deletes the cookie with the name "key".
+		def delete_cookie(key)
+			set_cookie(key, nil)
 		end
 		
 		# Returns the content of the cookie with the name "key".
 		def get_cookie(key)
-			request.cookie[key]
+			request.cookies[key]
 		end
 		
 		# Returns true if exists a cookie with the name "key".
 		# false otherwise.
 		def cookie_exists?(key)
-			request.cookie[key].empty?
+			request.cookies[key].is_a? String
 		end
 		
 		# Returns the user IP.

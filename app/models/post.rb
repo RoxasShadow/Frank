@@ -6,22 +6,22 @@ class Post
   property	:username, String,
 						:required => true, # error if not present
 						:length => 4..16, # min 4 and max 16 characters.
-						:format => /[a-zA-Z0-9_]/, # username must contains only letters, digits, or underscores.
+						:format => /\A[a-zA-Z0-9_]*\z/, # username must contains only letters, digits, or underscores.
 						:messages => { # if requires above are not respected
 							:presence => 'Username is required',
 							:format => 'Username must contains only letters, digits, or underscores.',
-							:length => 'Username length must be including betweet 4 and 16 characters.'
+							:length => 'Username length must be including between 4 and 16 characters.'
 						}
   property	:text, Text,
 						:required => true, # error if not present
-						:length => 1..65535, # min 1 and max 65535 characters.
 						:messages => { # if requires above are not respected
 							:presence => 'Text is required',
-							:length => 'Text length must be including betweet 1 and 65535 characters.'
 						}
   property	:created_at,	DateTime
   
-  before :valid?, :purge
+  validates_length_of :text, :minimum => 1
+  
+  before :save, :purge
   def purge
   	self.username = Rack::Utils.escape_html(self.username)
   	self.text = Rack::Utils.escape_html(self.text)
