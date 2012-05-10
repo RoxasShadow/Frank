@@ -19,7 +19,7 @@ class Post
 						}
   property	:created_at,	DateTime
   
-  validates_length_of :text, :minimum => 1
+  validates_length_of :text, :minimum => 2
   
   before :save, :purge
   def purge
