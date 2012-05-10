@@ -21,5 +21,9 @@ class Post
 						}
   property	:created_at,	DateTime
   
-  sanitize :default_mode => :basic # remove this line if you want to enable the html in the posts
+  before :valid?, :purge
+  def purge
+  	self.username = Rack::Utils.escape_html(self.username)
+  	self.text = Rack::Utils.escape_html(self.text)
+  end
 end

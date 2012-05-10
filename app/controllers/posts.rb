@@ -23,6 +23,7 @@ class Frank
     if @post.save
       redirect '/'
     else
+	   	@error = @post.errors.first.first
       erb :'posts/new'
     end
   end
